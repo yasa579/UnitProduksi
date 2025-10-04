@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace - Pembeli</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="app.js"></script>
+</head>
+<!-- ... rest of index.html ... -->
+<body>
+    <header>
+        <h1>🛍️ Unit Produksi Walisongo </h1>
+        <div class="header-buttons">
+            <button id="viewCartBtn">🛒 Keranjang (<span id="cartCount">0</span>)</button>
+            <button id="goToAdminBtn">🔧 Mode Penjual</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Modal Detail Produk -->
+        <div id="productDetailModal" class="modal">
+            <div class="modal-content">
+                <span class="close-detail">&times;</span>
+                <div id="productDetailContent">
+                    <!-- Content akan diisi oleh JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Keranjang -->
+        <div id="cartModal" class="modal">
+            <div class="modal-content cart-modal">
+                <span class="close-cart">&times;</span>
+                <h2>🛒 Keranjang Belanja</h2>
+                <div id="cartItems"></div>
+                <div class="cart-total">
+                    <h3>Total: Rp <span id="cartTotal">0</span></h3>
+                    <button id="checkoutBtn" class="checkout-btn">💳 Checkout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifikasi -->
+        <div id="notification" class="notification">
+            <span id="notificationMessage"></span>
+        </div>
+
+        <!-- Audio untuk notifikasi -->
+        <audio id="notificationSound" preload="auto">
+            <source src="notif.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Daftar Produk -->
+        <section class="products-section">
+            <div id="productsContainer" class="products-grid"></div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('goToAdminBtn').addEventListener('click', () => {
+            window.location.href = 'admin.html';
+        });
+    </script>
+</body>
+</html>

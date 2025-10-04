@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace - Admin Penjual</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="admin.js"></script>
+</head>
+<!-- ... rest of admin.html ... -->
+<body>
+    <header>
+        <h1>🔧 Dashboard Penjual</h1>
+        <div class="header-buttons">
+            <button id="goToBuyerBtn">🛍️ Mode Pembeli</button>
+            <button id="viewOrdersBtn">📋 Pesanan (<span id="ordersCount">0</span>)</button>
+            <button id="addProductBtn">➕ Tambah Produk</button>
+        </div>
+    </header>
+
+    <!-- Tambahkan di admin.html setelah header -->
+    <div id="loading" class="loading" style="display: none;">
+        <p>Loading...</p>
+    </div>
+
+    <main>
+        <!-- Modal Tambah/Edit Produk -->
+        <div id="productModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle">Tambah Produk Baru</h2>
+                <form id="productForm">
+                    <input type="hidden" id="productId">
+                    <input type="text" id="productName" placeholder="Nama Produk" required>
+                    <textarea id="productDescription" placeholder="Deskripsi Produk" required></textarea>
+                    <input type="number" id="productPrice" placeholder="Harga" required>
+                    <input type="number" id="productStock" placeholder="Stok" required>
+                    <input type="text" id="productImage" placeholder="URL Gambar" required>
+                    <div class="form-buttons">
+                        <button type="submit" id="submitBtn">Simpan Produk</button>
+                        <button type="button" id="cancelBtn">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal Pesanan -->
+        <div id="ordersModal" class="modal">
+            <div class="modal-content orders-modal">
+                <span class="close-orders">&times;</span>
+                <h2>📋 Daftar Pesanan</h2>
+                <div id="ordersList"></div>
+            </div>
+        </div>
+
+        <!-- Notifikasi -->
+        <div id="notification" class="notification">
+            <span id="notificationMessage"></span>
+        </div>
+
+        <!-- Audio untuk notifikasi -->
+        <audio id="notificationSound" preload="auto">
+            <source src="notif.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Dashboard Stats -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Produk</h3>
+                    <span id="totalProducts">0</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Pesanan</h3>
+                    <span id="totalOrders">0</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Produk Habis</h3>
+                    <span id="outOfStockProducts">0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daftar Produk -->
+        <section class="products-section">
+            <h2>📦 Kelola Produk</h2>
+            <div id="productsContainer" class="products-grid"></div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('goToBuyerBtn').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
